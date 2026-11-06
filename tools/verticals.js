@@ -212,9 +212,16 @@ function vStat(label, val, color){ return '<div class="stat"><div class="lbl">' 
 function vHero(label, val, sub){
   return '<div class="hero-card"><div class="hero-top"><div><div class="hero-lbl">' + tr(label) + '</div><div class="hero-val num">' + val + '</div><div class="hero-delta" style="opacity:.9;">' + sub + '</div></div></div></div>';
 }
+/* new messages for the owner or a manager sit at the top of the dashboard, with one tap to the inbox */
+function vUnreadCard(){
+  if(!isManagerOrOwner()) return '';
+  var u = unreadMessages(), n = u.length; if(!n) return '';
+  return '<div class="me-msg" data-goinbox="1"><div class="t">' + ICONS.bolt + '<span>' + n + ' ' + tr(n === 1 ? 'new message' : 'new messages') + '</span></div><div class="s">' + esc(u[0].fromName + ': ' + msgPreview(u[0]).slice(0, 90)) + '</div></div>';
+}
 function vertDashboardHtml(){
   var html = '';
   try{ html += pilotHomeNote(); }catch(e){}
+  try{ html += vUnreadCard(); }catch(e){}
   vertLabels();
   html += (bizType() === 'beauty' ? vBeautyDash() : vHospDash());
   html += vSetupCard() + vManageTiles();

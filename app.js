@@ -14312,7 +14312,7 @@ var MENU_HUBS = {
   'hub-stock': { name:'Stock and suppliers', icon:null, items:[['stocktake', 'Stock take & variances', 'clipboard', 'm'], ['suppliers', 'Suppliers', 'truck', 'm'], ['pos', 'Purchase orders', 'clipboard', 'm'], ['wastage', 'Wastage & shrinkage', 'trash', 'm']] },
   'hub-money': { name:'Money and tax', icon:null, items:[['tab-reconcile', 'Reconciliation', 'check', 'm'], ['vat', 'NamRA VAT summary', 'percent', 'm'], ['accountant', 'Accountant', 'chartbar', 'm']] },
   'hub-team':  { name:'Team and branches', icon:null, items:[['tab-team', 'Employee tracking', 'people', 'm'], ['branches', 'Branches', 'branch', 'o']] },
-  'hub-pesa':  { name:'RoyalStay account and ads', icon:null, items:[['pay', 'Pay for RoyalStay', 'receipt', 'o'], ['pesaad', 'RoyalStay Ad', 'bolt', 'm']] }
+  'hub-pesa':  { name:'RoyalStay account', icon:null, items:[['pay', 'Pay for RoyalStay', 'receipt', 'o']] }
 };
 function menuItemCount(k){
   try{
@@ -14633,7 +14633,7 @@ function stGrp(title, hint, body, open){
   return '<details class="st-grp"'+(open?' open':'')+'><summary><span class="st-t">'+tr(title)+'</span><span class="st-h">'+tr(hint)+'</span></summary><div class="st-b">'+body+'</div></details>';
 }
 /* ---- RoyalStay Ad: the promo video with the words to post alongside it ---- */
-var PESA_AD_POINTS = ['RoyalStay means money in Swahili and a weight in Spanish: a weightlifter for Namibia','Launching soon in the Namibian market','Works offline, even with no internet','Phone, tablet and computer','Ask RoyalStay in plain words','Made in Windhoek, Namibia'];
+var PESA_AD_POINTS = ['Rooms, bookings, tabs and invoices in one app','Works offline, even with no internet','Phone, tablet and computer','Ask Max in plain words','Made in Namibia for lodges, guest houses and hotels'];
 function pesaAdCaption(){
   return 'RoyalStay. Run your whole property from one app.\n\nA shop app built in Namibia, for Namibia. Sell, track stock, manage credit, make invoices and see your day at a glance, on your phone, tablet or computer, even with no internet.\n\n' +
     PESA_AD_POINTS.map(function(p){ return '\u2022 '+p; }).join('\n') + '\n\nFree 14 day trial.';
@@ -14686,7 +14686,6 @@ function settingsMoreHtml(){
   if(isOwner()) rows.push(['security','Security check','Passwords, sign in and data safety']);
   if(isOwner() && licOn()) rows.push(['licence','Licence and subscription','Your plan and renewal']);
   if(isOwner()) rows.unshift(['pay','Pay for RoyalStay','Plans, prices and how to pay']);
-  if(isManagerOrOwner()) rows.splice(isOwner() ? 1 : 0, 0, ['pesaad','RoyalStay Ad','Watch the promo video and share it']);
   if(isOwner()) rows.push(['setup','Setup guide','Steps to get your shop ready']);
   if(!isInstalledApp()) rows.push(['install','Install RoyalStay on this device','Open it like a normal app']);
   if(isManagerOrOwner()) rows.push(['vouchers','Vouchers','Sanlam, BestHome and other platforms']);
@@ -14712,7 +14711,6 @@ function settingsTopRowsHtml(){
   }
   var r = '';
   if(isOwner()) r += row('pay','Pay for RoyalStay','Plans, prices and how to pay','pay');
-  if(isManagerOrOwner()) r += row('pesaad','RoyalStay Ad','Watch the promo video and share it','about');
   return r ? '<div class="rowlist" style="margin-bottom:10px;">'+r+'</div>' : '';
 }
 function openSettingsSheet(){
@@ -18295,25 +18293,22 @@ function openLicenceSheet(){
 // aimed at a shop assistant learning the till for the first time. They are
 // for reading (and for the full training manual PDF); RoyalStay has no spoken voice.
 var LESSONS = [
-  { id:'developer', title:'Meet the developer and your privacy promise', icon:'info', who:'all', silent:true, slides:[
-    { title:'Meet the developer', photo:true, text:'Hello and welcome to RoyalStay! My name is RoyalStay Intelligence. I am a 30 year old software developer, born and raised right here in Windhoek, Namibia.',
+  { id:'developer', title:'About RoyalStay and your privacy promise', icon:'info', who:'all', silent:true, slides:[
+    { title:'About RoyalStay', text:'Welcome to RoyalStay Intelligence. It is made in Namibia for lodges, guest houses and hotels. This short lesson explains where your records live and what is promised about them.',
       where:'Menu → About RoyalStay' },
-    { title:'Why I built RoyalStay', text:'I built RoyalStay because I watched local Namibian shop owners struggle for years with expensive, over complicated point of sale systems imported from South Africa. Those corporate systems do not understand what it is like when our local internet towers go down, or how vital mobile wallets like PayToday, easyWallet and Blue Wallet are to our daily trade. RoyalStay was built specifically to solve those unique Namibian realities.',
+    { title:'Why it is built this way', text:'Many properties lose time when the internet goes down. RoyalStay saves everything on your own device first, so the front desk, restaurant and bar keep working without a connection. If you turn on sync, the devices share the same records through your own private database.',
       where:'Menu → About RoyalStay' },
-    { title:'What the word RoyalStay means', text:'RoyalStay is a Swahili word for money, used across East Africa and beyond. I chose it because money is what every shop lives on: what comes in, what goes out, and what is left at the end of the day. The whole app is built around that. Every sale, expense, credit account and cash up is a story about money, and RoyalStay keeps those stories clear and in order. It also sits beside our promise, Run your whole property from one app: it is your money, and the pride is in running your own shop well.',
-      tip:'Mula is the street word for money in Namibia, so the name and the promise say the same thing in two voices.',
-      where:'Menu → About RoyalStay' },
-    { title:'Run your whole property from one app', text:'Because the phrase Run your whole property from one app is our core promise, this application comes with a strict confidentiality agreement. Here are the three promises that matter most.',
+    { title:'Run your whole property from one app', text:'Rooms, bookings, guests, tabs, invoices, staff and stock are all in one place. Because your records matter, this application comes with a confidentiality agreement. Here are the three promises that matter most.',
       where:'Menu → Terms, privacy and support',
       tip:'You can read the full agreement any time under Menu, Terms, privacy and support, and on the About RoyalStay page.' },
-    { title:'Promise one: total data sovereignty', text:'Your sales, inventory and customer credits belong strictly to your shop. I have zero access to your margins.',
+    { title:'Promise one: your records belong to your property', text:'Your bookings, guests, tabs, sales and credit accounts belong strictly to your property. RoyalStay has no access to them.',
       where:'Menu → About RoyalStay → Your privacy and confidentiality' },
     { title:'Promise two: no central server trackers', text:'RoyalStay saves your data to your own computer or device first. If you turn on cloud syncing, it connects only to a private online database that you control through Supabase.',
       where:'Settings → Advanced RoyalStay Connection settings' },
-    { title:'Promise three: no hidden backdoors', text:'The application does not send usage tracking, background analytics or financial reports back to me.',
+    { title:'Promise three: no hidden backdoors', text:'The application does not send usage tracking, background analytics or financial reports back to RoyalStay.',
       where:'Menu → About RoyalStay → Your privacy and confidentiality',
-      tip:'To be fully open: the first time RoyalStay is opened online it fetches its fonts and its PDF tool from public servers, a password reset email is sent only if the owner sets that up, and tax records go to NamRA only if you enter its details. None of these carry your business records to me.' },
-    { title:'Thank you, and how to reach me', text:'Thank you for choosing local innovation to drive Namibia\'s retail growth. If you ever have technical feedback or questions during your store operations, you can reach the RoyalStay Representative Team through the support page in the app.',
+      tip:'To be fully open: the first time RoyalStay is opened online it fetches its fonts and its PDF tool from public servers, a password reset email is sent only if the owner sets that up, and tax records go to NamRA only if you enter its details. None of these carry your business records to RoyalStay.' },
+    { title:'Thank you, and how to reach us', text:'Thank you for choosing local innovation for Namibia\'s hospitality. If you ever have technical feedback or questions during your day to day work, you can reach the RoyalStay Representative Team through the support page in the app.',
       where:'Menu → Terms, privacy and support' }
   ]},
   { id:'employees', title:'Adding employees', icon:'people', who:'manager', slides:[
@@ -24990,9 +24985,16 @@ function vStat(label, val, color){ return '<div class="stat"><div class="lbl">' 
 function vHero(label, val, sub){
   return '<div class="hero-card"><div class="hero-top"><div><div class="hero-lbl">' + tr(label) + '</div><div class="hero-val num">' + val + '</div><div class="hero-delta" style="opacity:.9;">' + sub + '</div></div></div></div>';
 }
+/* new messages for the owner or a manager sit at the top of the dashboard, with one tap to the inbox */
+function vUnreadCard(){
+  if(!isManagerOrOwner()) return '';
+  var u = unreadMessages(), n = u.length; if(!n) return '';
+  return '<div class="me-msg" data-goinbox="1"><div class="t">' + ICONS.bolt + '<span>' + n + ' ' + tr(n === 1 ? 'new message' : 'new messages') + '</span></div><div class="s">' + esc(u[0].fromName + ': ' + msgPreview(u[0]).slice(0, 90)) + '</div></div>';
+}
 function vertDashboardHtml(){
   var html = '';
   try{ html += pilotHomeNote(); }catch(e){}
+  try{ html += vUnreadCard(); }catch(e){}
   vertLabels();
   html += (bizType() === 'beauty' ? vBeautyDash() : vHospDash());
   html += vSetupCard() + vManageTiles();
