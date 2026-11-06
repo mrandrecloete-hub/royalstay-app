@@ -17410,15 +17410,15 @@ async function acctDownloadGl(from, to){
 function acctFiledFor(from, to){ return State.accountingPeriods.find(function(r){ return r.from === from && r.to === to; }) || null; }
 var ACCT_CSS3 = '<style>' +
   '.sheet.ac-dark{max-width:min(1080px,98vw);overflow-x:hidden;background:radial-gradient(120% 70% at 85% 0%,#0F276B 0%,rgba(15,39,107,0) 60%),radial-gradient(90% 60% at 0% 100%,rgba(217,154,30,.20) 0%,rgba(217,154,30,0) 55%),linear-gradient(170deg,#040C26 0%,#020718 55%,#030A1F 100%);' +
-    '--surface:rgba(255,255,255,.07);--surface-2:rgba(255,255,255,.12);--text:#F6F9FF;--text-muted:#CDD7EF;--border:rgba(124,157,240,.24);--primary:#2B57D4;--primary-dim:#2B57D4;--primary-contrast:#040C25;--success:#4B78E3;--danger:#FF8A7A;--bg:#030C26;color:#EAEFFB;position:relative;}' +
-  '.ac-dark .sheet-head h2,.ac-dark h3{color:#EAEFFB;}.ac-dark .section-title,.ac-dark .ac-help,.ac-dark .ac-grp{color:#CDD7EF;}.ac-dark .ac-per button{background:rgba(255,255,255,.08);color:#EAEFFB;border-color:rgba(124,157,240,.3);}.ac-dark .ac-per button[aria-pressed="true"]{background:#2B57D4;color:#040C25;}.ac-dark .sheet-backrow{color:#BFCFF5;}' +
+    '--surface:rgba(255,255,255,.07);--surface-2:rgba(255,255,255,.12);--text:#EAEFFB;--text-muted:#9FADCD;--border:rgba(124,157,240,.24);--primary:#2B57D4;--primary-dim:#2B57D4;--primary-contrast:#040C25;--success:#4B78E3;--danger:#FF8A7A;--bg:#030C26;color:#EAEFFB;position:relative;}' +
+  '.ac-dark .sheet-head h2,.ac-dark h3{color:#EAEFFB;}.ac-dark .section-title,.ac-dark .ac-help,.ac-dark .ac-grp{color:#9FADCD;}.ac-dark .ac-per button{background:rgba(255,255,255,.08);color:#EAEFFB;border-color:rgba(124,157,240,.3);}.ac-dark .ac-per button[aria-pressed="true"]{background:#2B57D4;color:#040C25;}.ac-dark .sheet-backrow{color:#BFCFF5;}' +
   '.ac-dark .btn-ghost{background:rgba(255,255,255,.08);color:#EAEFFB;border-color:rgba(124,157,240,.35);}.ac-dark .btn-primary{background:linear-gradient(135deg,#2B57D4,#143799);color:#040C25;border:0;}' +
   '.ac-dark select,.ac-dark input[type=date],.ac-dark input[type=text],.ac-dark input[type=file]{background:rgba(255,255,255,.08);color:#EAEFFB;border-color:rgba(124,157,240,.35);color-scheme:dark;}' +
   '.ac-dark .tillcard,.ac-dark .rep-note{background:rgba(255,255,255,.06);border-color:rgba(124,157,240,.22);color:#EAEFFB;}' +
   '.ac-dark .ac-status,.ac-dark .ac-doc,.ac-dark .ac-hero,.ac-dark .ac-res{background:rgba(255,255,255,.07);border-color:rgba(124,157,240,.26);}' +
   '.ac-wm{position:sticky;top:0;height:0;z-index:0;pointer-events:none;overflow:visible;}.ac-wm img{position:absolute;right:0;top:26px;width:min(72%,430px);opacity:.14;filter:saturate(1.2);}' +
   '.ac-dark>*:not(.ac-wm){position:relative;z-index:1;}' +
-  '.ac-top{display:flex;align-items:center;gap:10px;margin:2px 0 14px;}.ac-top img{height:40px;width:auto;}.ac-word{font-size:30px;font-weight:800;letter-spacing:-.01em;color:#fff;}' +
+  '.ac-top{display:flex;align-items:center;gap:10px;margin:2px 0 14px;flex-wrap:wrap;}.ac-top img{height:40px;width:auto;}.ac-word{font-size:30px;font-weight:800;letter-spacing:-.01em;color:#fff;}' +
   '.ac-pill{margin-left:auto;border:1px solid rgba(124,157,240,.35);border-radius:999px;padding:7px 12px;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;line-height:1.45;color:#CFDBF5;text-align:left;white-space:nowrap;}@media (min-width:600px){.ac-pill{font-size:9.5px;letter-spacing:.14em;}}' +
   '.ac-gold{width:54px;height:3px;border-radius:3px;background:linear-gradient(90deg,#F2C25A,#D99A1E);margin:6px 0 12px;}' +
   '.ac-h{font-family:Inter,system-ui,sans-serif;margin:0;font-size:40px;line-height:1.05;font-weight:800;color:#fff;letter-spacing:-.01em;}.ac-tag{margin:10px 0 16px;font-size:16px;line-height:1.45;color:#8FABF0;}' +
@@ -17426,7 +17426,7 @@ var ACCT_CSS3 = '<style>' +
   '.ac-hubtile{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-height:236px;padding:16px 14px 52px;border-radius:24px;border:1px solid rgba(150,180,255,.30);background:linear-gradient(165deg,rgba(60,100,210,.22),rgba(8,21,60,.62));box-shadow:0 14px 30px -16px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.14);color:#fff;font:inherit;cursor:pointer;transition:transform .08s ease-out,border-color .15s;}' +
   '.ac-hubtile:hover,.ac-hubtile:focus-visible{border-color:#F2C25A;}.ac-hubtile:active{transform:scale(.98);}' +
   '.ac-hubtile .ic{display:block;margin:2px 0 14px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.45));}.ac-hubtile .nm{font-size:19px;font-weight:800;line-height:1.15;}' +
-  '.ac-hubtile .ds{font-size:12.5px;line-height:1.45;color:#DDE4F5;margin-top:8px;}.ac-hubtile .go{position:absolute;right:12px;bottom:12px;width:44px;height:30px;border-radius:15px;background:rgba(43,87,212,.22);border:1px solid rgba(124,157,240,.35);display:grid;place-items:center;color:#EAEFFB;}' +
+  '.ac-hubtile .ds{font-size:12.5px;line-height:1.45;color:#BFCAE4;margin-top:8px;}.ac-hubtile .go{position:absolute;right:12px;bottom:12px;width:44px;height:30px;border-radius:15px;background:rgba(43,87,212,.22);border:1px solid rgba(124,157,240,.35);display:grid;place-items:center;color:#EAEFFB;}' +
   '.ac-foot{margin:20px 0 4px;padding-top:12px;border-top:1px solid rgba(124,157,240,.18);display:flex;gap:12px;align-items:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#E8C770;}.ac-foot i{font:italic 700 24px Georgia,serif;letter-spacing:0;text-transform:none;color:#F2C25A;}' +
   '.ac-back{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(124,157,240,.35);background:rgba(255,255,255,.08);color:#EAEFFB;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;margin:2px 0 10px;}' +
   '.ac-badge{border-radius:14px;padding:11px 13px;font-size:13.5px;font-weight:700;margin:6px 0 10px;border:1px solid;}.ac-badge.ok{background:rgba(75,120,227,.14);border-color:rgba(75,120,227,.5);color:#8FABF0;}.ac-badge.bad{background:rgba(255,138,122,.14);border-color:rgba(255,138,122,.5);color:#FFB3A8;}' +
@@ -24848,7 +24848,7 @@ function vertTiles(kind, tiles){ var h = VERT_HIDE[bizType()]; if(!h || !h[kind]
    every business needs (messages, reports, expenses, team, accounts, settings). Retail keeps the full RoyalStay app and none of the pages below. */
 var VERT_KEEP = {
   beauty:      ['inbox', 'tab-dashboard', 'tab-stock', 'tab-reports', 'tab-expenses', 'tab-team', 'vat', 'accountant', 'pay', 'v-type', 'settings', 'hub-money', 'hub-team', 'hub-pesa'],
-  hospitality: ['inbox', 'tab-dashboard', 'tab-stock', 'tab-invoices', 'tab-reports', 'tab-expenses', 'tab-team', 'vat', 'accountant', 'pay', 'v-type', 'settings', 'hub-money', 'hub-team', 'hub-pesa']
+  hospitality: ['inbox', 'tab-dashboard', 'tab-stock', 'tab-invoices', 'tab-reports', 'tab-expenses', 'tab-team', 'vat', 'accountant', 'pay', 'v-type', 'settings', 'hub-money', 'hub-team', 'hub-pesa', 'hub-tools', 'insights', 'bizhub', 'smart', 'agent']
 };
 function vStrictRows(html){
   var t = bizType(), keep = VERT_KEEP[t].concat(['tab-me', 'tab-records']); if(!isManagerOrOwner()) keep.push('tab-till');

@@ -36,8 +36,8 @@ let fail=0; const ck=(n,c)=>{ console.log((c?'  ok   ':'  FAIL ')+n); if(!c){fai
   ck('split by blank line and by lines', m.sp1===2 && m.sp2===3);
   // ---- UI
   await p.evaluate(()=>window.__t.openBizHub()); await p.waitForTimeout(300);
-  ck('hub tiles present', await p.evaluate(()=>!!document.querySelector('[data-bt=landed]') && !!document.querySelector('[data-bt=momo]')));
-  await p.click('[data-bt=landed]'); await p.waitForSelector('#lcLines');
+  ck('hub tiles present (the import cost tile is for shops, so a lodge has the mobile money tile)', await p.evaluate(()=>!!document.querySelector('[data-bt=momo]')));
+  await p.evaluate(()=>{ window.__t.closeModal(); window.__t.openLandedSheet(); }); await p.waitForSelector('#lcLines');   // the tile is hidden for a lodge, the calculator still works
   await p.selectOption('[data-lc="0"] select','');
   const prodId = await p.evaluate(()=>window.__t.State.products.find(x=>x.name==='Rice 2kg').id);
   await p.selectOption('[data-lc="0"] [data-f=productId]', prodId);
